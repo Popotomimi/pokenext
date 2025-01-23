@@ -13,17 +13,19 @@ const Navbar = () => {
           height="30"
           alt="PokeNext"
         />
-        <h1 className="m-4">PokeNext</h1>
+        <h1 className="m-4 font-bold">PokeNext</h1>
       </div>
       <ul className="flex m-4 ml-auto space-x-4">
         <li className="m-4">
-          <Link href="/" legacyBehavior>
-            <a>Home</a>
+          <Link href="/" className="hover:border-b-2 hover:border-red-500 pb-1">
+            Home
           </Link>
         </li>
         <li className="m-4">
-          <Link href="/about" legacyBehavior>
-            <a>Sobre</a>
+          <Link
+            className="hover:text-bolder hover:border-b-2 hover:border-red-500 pb-1"
+            href="/about">
+            Sobre
           </Link>
         </li>
       </ul>
