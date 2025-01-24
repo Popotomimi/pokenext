@@ -1,13 +1,13 @@
+import React from "react";
 import { GetStaticProps } from "next";
-
 import Image from "next/image";
+import Card from "../components/Card";
 
 interface Pokemon {
   name: string;
   url: string;
   id?: number;
 }
-
 interface HomeProps {
   pokemons: Pokemon[];
 }
@@ -15,27 +15,19 @@ interface HomeProps {
 export const getStaticProps: GetStaticProps = async () => {
   const maxPokemons = 251;
   const api = "https://pokeapi.co/api/v2/pokemon";
-
   const res = await fetch(`${api}/?limit=${maxPokemons}`);
   const data = await res.json();
-
-  // add pokemon index
   data.results.forEach((item: Pokemon, index: number) => {
     item.id = index + 1;
   });
-
-  return {
-    props: {
-      pokemons: data.results,
-    },
-  };
+  return { props: { pokemons: data.results } };
 };
 
 const Home: React.FC<HomeProps> = ({ pokemons }) => {
   return (
     <>
       <div className="font-center flex justify-center items-center m-5">
-        <h1 className="text-5xl">
+        <h1 className="text-5xl m-5">
           Poke<span className="font-bold text-red-500">Next</span>
         </h1>
         <Image
@@ -48,7 +40,7 @@ const Home: React.FC<HomeProps> = ({ pokemons }) => {
       </div>
       <div className="flex flex-wrap justify-between items-center max-w-4xl mx-auto">
         {pokemons.map((pokemon) => (
-          <p key={pokemon.id}>{pokemon.name}</p>
+          <Card key={pokemon.id} pokemon={pokemon} />
         ))}
       </div>
     </>
