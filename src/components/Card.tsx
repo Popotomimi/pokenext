@@ -25,13 +25,15 @@ const Card = ({ pokemon }: CardProps) => {
         } else {
           setImageSrc("/images/fallback.png");
         }
-      } catch (error) {
+      } catch {
         setImageSrc("/images/fallback.png");
       }
     };
 
-    checkImage(imageSrc);
-  }, []);
+    checkImage(
+      `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.id}.png`
+    );
+  }, [pokemon.id]);
 
   return (
     <div className="flex justify-center items-center flex-col p-8 m-5 w-full sm:w-1/2 md:w-1/3 lg:w-1/4 rounded-lg border border-red-500 shadow-lg bg-zinc-800 text-white">

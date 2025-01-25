@@ -16,6 +16,11 @@ interface Pokemon {
   types: PokemonType[];
 }
 
+interface Result {
+  name: string;
+  url: string;
+}
+
 interface PokemonIdProps {
   pokemon: Pokemon;
 }
@@ -27,11 +32,9 @@ export const getStaticPaths: GetStaticPaths = async () => {
   const data = await res.json();
 
   // params
-  const paths = data.results.map((pokemon: any, index: number) => {
-    return {
-      params: { pokemonid: (index + 1).toString() },
-    };
-  });
+  const paths = data.results.map((_: Result, index: number) => ({
+    params: { pokemonid: (index + 1).toString() },
+  }));
 
   return {
     paths,
@@ -69,8 +72,10 @@ const PokemonId: React.FC<PokemonIdProps> = ({ pokemon }) => {
       }
     };
 
-    checkImage(imageSrc);
-  }, [imageSrc]);
+    checkImage(
+      `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.id}.png`
+    );
+  }, [pokemon.id]);
 
   return (
     <div className="text-center">
