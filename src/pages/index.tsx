@@ -6,8 +6,9 @@ import Card from "../components/Card";
 interface Pokemon {
   name: string;
   url: string;
-  id?: number;
+  id: number;
 }
+
 interface HomeProps {
   pokemons: Pokemon[];
 }

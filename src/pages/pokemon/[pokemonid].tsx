@@ -1,15 +1,33 @@
 import { useEffect, useState } from "react";
-
 import Image from "next/image";
+import { GetStaticPaths, GetStaticProps } from "next";
 
-export const getStaticPaths = async () => {
+interface PokemonType {
+  type: {
+    name: string;
+  };
+}
+
+interface Pokemon {
+  id: number;
+  name: string;
+  height: number;
+  weight: number;
+  types: PokemonType[];
+}
+
+interface PokemonIdProps {
+  pokemon: Pokemon;
+}
+
+export const getStaticPaths: GetStaticPaths = async () => {
   const maxPokemons = 251;
   const api = "https://pokeapi.co/api/v2/pokemon";
   const res = await fetch(`${api}/?limit=${maxPokemons}`);
   const data = await res.json();
 
   // params
-  const paths = data.results.map((pokemon, index) => {
+  const paths = data.results.map((pokemon: Pokemon, index: number) => {
     return {
       params: { pokemonid: (index + 1).toString() },
     };
@@ -21,19 +39,18 @@ export const getStaticPaths = async () => {
   };
 };
 
-export const getStaticProps = async (context) => {
-  const id = context.params.pokemonid;
+export const getStaticProps: GetStaticProps = async (context) => {
+  const id = context.params?.pokemonid as string;
 
   const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`);
-
-  const data = await res.json();
+  const data: Pokemon = await res.json();
 
   return {
     props: { pokemon: data },
   };
 };
 
-const PokemonId = ({ pokemon }) => {
+const PokemonId: React.FC<PokemonIdProps> = ({ pokemon }) => {
   const [imageSrc, setImageSrc] = useState<string>(
     `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.id}.png`
   );
