@@ -5,7 +5,7 @@ import Link from "next/link";
 import { BsGithub, BsLinkedin } from "react-icons/bs";
 
 const Footer = () => {
-  let year = new Date();
+  const year = new Date();
 
   return (
     <footer className="bg-zinc-800 mt-10 p-5 py-10 text-white border-t border-red-500 flex flex-col md:flex-row justify-between items-center">

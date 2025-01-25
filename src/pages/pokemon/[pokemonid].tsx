@@ -27,7 +27,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   const data = await res.json();
 
   // params
-  const paths = data.results.map((pokemon: Pokemon, index: number) => {
+  const paths = data.results.map((pokemon: any, index: number) => {
     return {
       params: { pokemonid: (index + 1).toString() },
     };
@@ -64,7 +64,7 @@ const PokemonId: React.FC<PokemonIdProps> = ({ pokemon }) => {
         } else {
           setImageSrc("/images/fallback.png");
         }
-      } catch (error) {
+      } catch {
         setImageSrc("/images/fallback.png");
       }
     };
@@ -100,14 +100,14 @@ const PokemonId: React.FC<PokemonIdProps> = ({ pokemon }) => {
             </span>
           ))}
         </div>
-        <div>
-          <h3 className="font-bold mt-3">Altura:</h3>
-          <p>{pokemon.height * 10} cm</p>
-        </div>
-        <div>
-          <h3 className="font-bold">Peso:</h3>
-          <p>{pokemon.weight / 10} kg</p>
-        </div>
+      </div>
+      <div>
+        <h3 className="font-bold mt-3">Altura:</h3>
+        <p>{pokemon.height * 10} cm</p>
+      </div>
+      <div>
+        <h3 className="font-bold">Peso:</h3>
+        <p>{pokemon.weight / 10} kg</p>
       </div>
     </div>
   );
