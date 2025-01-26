@@ -115,7 +115,7 @@ const PokemonId: React.FC<PokemonIdProps> = ({ pokemon }) => {
   };
 
   return (
-    <div className="text-center">
+    <div className="text-center mt-32">
       <h1 className="capitalize rounded-lg w-2/4 mx-auto mt-10 p-2 text-white text-3xl font-bold bg-zinc-800">
         {pokemon.name}
       </h1>
