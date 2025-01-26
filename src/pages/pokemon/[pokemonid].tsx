@@ -77,12 +77,48 @@ const PokemonId: React.FC<PokemonIdProps> = ({ pokemon }) => {
     );
   }, [pokemon.id]);
 
+  type PokemonTypeName =
+    | "grass"
+    | "poison"
+    | "fire"
+    | "water"
+    | "bug"
+    | "flying"
+    | "normal"
+    | "electric"
+    | "ground"
+    | "ghost"
+    | "fairy"
+    | "fighting"
+    | "psychic"
+    | "rock"
+    | "steel"
+    | "ice";
+
+  const typeColors: Record<PokemonTypeName, string> = {
+    grass: "bg-grass",
+    poison: "bg-poison",
+    fire: "bg-fire",
+    water: "bg-water",
+    bug: "bg-bug",
+    flying: "bg-flying",
+    normal: "bg-normal",
+    electric: "bg-electric",
+    ground: "bg-ground",
+    ghost: "bg-ghost",
+    fairy: "bg-fairy",
+    fighting: "bg-fighting",
+    psychic: "bg-psychic",
+    rock: "bg-rock",
+    steel: "bg-steel",
+    ice: "bg-ice",
+  };
+
   return (
     <div className="text-center">
       <h1 className="capitalize rounded-lg w-2/4 mx-auto mt-10 p-2 text-white text-3xl font-bold bg-zinc-800">
         {pokemon.name}
       </h1>
-
       <Image
         className="m-auto"
         src={imageSrc}
@@ -99,7 +135,9 @@ const PokemonId: React.FC<PokemonIdProps> = ({ pokemon }) => {
         <div>
           {pokemon.types.map((item, index) => (
             <span
-              className="bg-zinc-700 text-white uppercase font-bold m-1 p-1.5 pb-2.5 rounded-lg"
+              className={`${
+                typeColors[item.type.name as PokemonTypeName] || "bg-default"
+              } text-white uppercase font-bold m-1 p-1.5 pb-2.5 rounded-lg`}
               key={index}>
               {item.type.name}
             </span>
@@ -110,7 +148,7 @@ const PokemonId: React.FC<PokemonIdProps> = ({ pokemon }) => {
         <h3 className="font-bold mt-3">Altura:</h3>
         <p>{pokemon.height * 10} cm</p>
       </div>
-      <div>
+      <div className="mb-32">
         <h3 className="font-bold">Peso:</h3>
         <p>{pokemon.weight / 10} kg</p>
       </div>
