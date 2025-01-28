@@ -39,7 +39,7 @@ const Home: React.FC<HomeProps> = ({ pokemons }) => {
           alt="Pokenext"
         />
       </div>
-      <div className="flex flex-wrap justify-between items-center max-w-4xl mx-auto">
+      <div className="flex flex-wrap justify-between items-center max-w-6xl mx-auto">
         {pokemons.map((pokemon) => (
           <Card key={pokemon.id} pokemon={pokemon} />
         ))}
